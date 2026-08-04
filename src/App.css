@@ -1,0 +1,35 @@
+@import "tailwindcss";
+:root {
+  /* Brand colors (from your logo) */
+  --color-primary: #1BA7A5;   /* Teal house outline */
+  --color-accent: #E63946;    /* Red window squares */
+
+  /* Supporting palette */
+  --color-primary-light: #CFF7E3; /* Soft mint for backgrounds */
+  --color-primary-dark: #0E6F6D;  /* Deep teal for contrast */
+
+  /* Neutral system */
+  --color-black: #1F2D3D;
+  --color-gray-dark: #4A5568;
+  --color-gray: #A0AEC0;
+  --color-gray-light: #EDF2F7;
+  --color-white: #FFFFFF;
+
+  /* Status colors */
+  --color-success: #2ECC71;
+  --color-warning: #F5A623;
+  --color-danger: #E74C3C;
+
+  /* Text colors */
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-gray-dark);
+  --text-inverse: var(--color-white);
+
+  /* Backgrounds */
+  --bg-main: var(--color-gray-light);
+  --bg-card: var(--color-white);
+  --bg-accent: var(--color-primary-light);
+
+  /* Borders */
+  --border-color: #E2E8EE;
+}
