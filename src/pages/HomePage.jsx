@@ -20,7 +20,7 @@ export default function HomePage() {
 
   return (
     <div className="page-enter">
-      {/* ---------- Hero ---------- */}
+      {/* Hero */}
       <section className="relative overflow-hidden bg-linear-to-br from-primary-dark via-primary to-primary-light">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
@@ -59,7 +59,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- Service categories ---------- */}
+      {/* Service categories */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
@@ -77,7 +77,7 @@ export default function HomePage() {
           {SERVICES.map((s) => (
             <ServiceCard key={s.id} service={s} />
           ))}
-          {/* CTA tile completes the grid */}
+
           <Link
             to="/providers"
             className="group flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-primary/30 bg-primary/5 p-6 text-center transition hover:border-primary hover:bg-primary/10"
@@ -89,7 +89,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- Featured providers (DummyJSON) ---------- */}
       {providers.length > 0 && (
         <section className="bg-white py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -111,7 +110,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ---------- How it works ---------- */}
+      {/* How it works */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <h2 className="text-center text-3xl font-extrabold text-ink">How HomeServe works</h2>
         <div className="mt-10 grid gap-6 md:grid-cols-3">

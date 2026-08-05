@@ -23,7 +23,7 @@ export default function ServiceCard({ service }) {
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-200/70 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
     >
       {/* Emoji banner */}
-      <div className="relative flex h-36 items-center justify-center bg-gradient-to-br from-primary-light via-white to-fog">
+      <div className="relative flex h-36 items-center justify-center bg-linear-to-br from-primary-light via-white to-fog">
         <span className="text-6xl drop-shadow-sm transition-transform duration-300 group-hover:scale-110">
           {service.emoji}
         </span>

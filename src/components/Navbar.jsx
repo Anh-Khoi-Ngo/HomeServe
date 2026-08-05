@@ -32,7 +32,6 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop links */}
         <div className="hidden items-center gap-1 md:flex">
           {LINKS.map((l) => (
             <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === '/'}>
@@ -41,7 +40,6 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right side: auth */}
         <div className="flex items-center gap-3">
           {authType === 'clerk' ? (
             <UserButton afterSignOutUrl="/" />
@@ -66,7 +64,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(!open)}
             className="flex h-10 w-10 items-center justify-center rounded-full text-ink-soft transition hover:bg-fog md:hidden"
@@ -90,7 +87,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {open && (
         <div className="border-t border-gray-100 bg-white px-4 py-3 md:hidden">
           <div className="flex flex-col gap-1">

@@ -19,7 +19,7 @@ export default function ProviderCard({ provider, showService = false }) {
             loading="lazy"
           />
         ) : (
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-dark text-xl font-extrabold text-white">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary-dark text-xl font-extrabold text-white">
             {provider.name?.[0]?.toUpperCase()}
           </div>
         )}
@@ -40,7 +40,6 @@ export default function ProviderCard({ provider, showService = false }) {
         </div>
       </div>
 
-      {/* Skill chips */}
       <div className="mt-4 flex flex-wrap gap-1.5">
         {(provider.skills || []).slice(0, 3).map((skill) => (
           <span
