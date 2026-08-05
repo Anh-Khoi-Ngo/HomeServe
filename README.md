@@ -1,16 +1,76 @@
-# React + Vite
+# 🏠 HomeServe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Book trusted home service pros — cleaning, plumbing, electrical, lawn care, snow
+removal, painting, and handyman — online in under a minute.
 
-Currently, two official plugins are available:
+Built with **React + Vite + TailwindCSS v4**, with **Clerk** auth, **Firebase**
+(Firestore) for bookings & users, **GeoDB Cities** for city search, **DummyJSON**
+for providers & reviews, and **OpenStreetMap** for addresses & maps.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Run it
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+It works with **zero configuration** — every external service has a graceful
+demo fallback (guest login, localStorage, sample cities, local reviews).
 
-## Expanding the ESLint configuration
+## 🔑 Optional env vars
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Copy `.env.example` to `.env` and fill in what you have. Every value is optional.
+
+| Variable | Service | What it enables |
+| --- | --- | --- |
+| `VITE_CLERK_PUBLISHABLE_KEY` | [Clerk](https://dashboard.clerk.com) | Real accounts, sign in/up UI |
+| `VITE_FIREBASE_*` | [Firebase](https://console.firebase.google.com) | Bookings & users in Firestore |
+| `VITE_GEO_DB_KEY` | [GeoDB Cities](https://rapidapi.com/wirefreethought/api/geodb-cities) (free RapidAPI key) | Live city search |
+
+Firebase setup: create a Firestore database, enable it, then paste the web app
+config into `.env`. Add a `bookings` collection — it's written with the app's
+default rules.
+
+## 📁 Folder structure
+
+```
+src/
+├── main.jsx                 # Entry: BrowserRouter + AuthProvider
+├── App.jsx                  # Routes + layout shell
+├── index.css                # Tailwind theme + brand palette
+├── context/
+│   └── AuthContext.jsx      # Clerk auth, with demo-mode fallback (useAppUser)
+├── data/
+│   └── services.js          # The 7 services + fallback data
+├── services/
+│   ├── dummyjson.js         # API: providers + reviews
+│   ├── geodb.js             # API: city search
+│   ├── osm.js               # API: OpenStreetMap geocoding + map embeds
+│   ├── firebase.js          # API: bookings + users (Firestore / localStorage)
+│   └── storage.js           # Favorites (localStorage)
+├── components/              # Navbar, Footer, cards, ratings, city search, map
+└── pages/                   # One file per page
+    ├── HomePage.jsx
+    ├── ServicesPage.jsx
+    ├── ServiceDetailPage.jsx
+    ├── ProvidersPage.jsx
+    ├── ProviderDetailPage.jsx
+    ├── BookingPage.jsx
+    ├── BookingsPage.jsx
+    ├── FavoritesPage.jsx
+    └── SignInPage.jsx
+```
+
+## 🧭 Routes
+
+| Route | Page |
+| --- | --- |
+| `/` | Home — hero, city search, services, top providers |
+| `/services` | All 7 service categories |
+| `/services/:id` | Service detail — description, price, what's included, reviews, Book Now |
+| `/providers` | Provider directory (filter by category) |
+| `/providers/:id` | Provider profile — photo, skills, rating, completed jobs |
+| `/book/:serviceId` | Booking — date, time, address (OSM), notes → confirm |
+| `/bookings` | Booking history + cancel |
+| `/favorites` | Saved services |
+| `/sign-in` | Clerk sign-in / demo guest login |

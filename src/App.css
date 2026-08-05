@@ -1,6 +1,6 @@
 @import "tailwindcss";
 :root {
-  /* Brand colors (from your logo) */
+  /* Brand colors */
   --color-primary: #1BA7A5;   /* Teal house outline */
   --color-accent: #E63946;    /* Red window squares */
 
