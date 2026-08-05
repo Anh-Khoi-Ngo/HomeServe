@@ -51,7 +51,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/40">
-        © {new Date().getFullYear()} HomeServe. Built for demos — be kind to the free APIs.
+        © {new Date().getFullYear()} HomeServe. All rights reserved.
       </div>
     </footer>
   )
