@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { searchCities } from '../services/geodb.js'
 
-/**
- * City search powered by GeoDB Cities (falls back to a local list).
- * onSelect(city) is called with { name, country, lat, lon } when a city is picked.
- */
 export default function CitySearch({ label, placeholder, onSelect }) {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
