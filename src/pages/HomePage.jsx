@@ -21,7 +21,7 @@ export default function HomePage() {
   return (
     <div className="page-enter">
       {/* ---------- Hero ---------- */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-primary-light">
+      <section className="relative overflow-hidden bg-linear-to-br from-primary-dark via-primary to-primary-light">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28">
@@ -134,7 +134,7 @@ export default function HomePage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-14 flex flex-col items-center justify-center gap-4 rounded-3xl bg-gradient-to-r from-primary to-primary-dark p-10 text-center text-white sm:flex-row sm:text-left">
+        <div className="mt-14 flex flex-col items-center justify-center gap-4 rounded-3xl bg-linear-to-r from-primary to-primary-dark p-10 text-center text-white sm:flex-row sm:text-left">
           <div className="flex-1">
             <h3 className="text-2xl font-extrabold">Ready to get it done?</h3>
             <p className="mt-1 text-white/80">Join thousands of homeowners booking pros online.</p>
