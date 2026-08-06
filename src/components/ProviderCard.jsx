@@ -18,55 +18,48 @@ export default function ProviderCard({ provider, showService = false }) {
       to={`/providers/${provider.id}`}
       className="group relative flex flex-col overflow-hidden rounded-3xl border border-gray-200/70 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/15"
     >
-      {/* ------- Banner header ------- */}
-      <div className="relative h-20 shrink-0 overflow-hidden bg-linear-to-br from-primary-dark via-primary to-primary-light">
-        <div className="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full bg-white/20 blur-xl transition-transform duration-500 group-hover:scale-125" />
-        <div className="pointer-events-none absolute -bottom-12 -left-6 h-28 w-28 rounded-full bg-white/10 blur-xl" />
-
-        <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3">
-          {showService && service ? (
-            <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-bold text-primary-dark shadow-sm backdrop-blur">
-              {service.emoji} {service.name}
-            </span>
+      {/* ------- Avatar + identity ------- */}
+      <div className="flex items-center gap-4 px-5 pt-5">
+        <div className="shrink-0">
+          {provider.imageUrl ? (
+            <img
+              src={provider.imageUrl}
+              alt={provider.name}
+              className="h-20 w-20 rounded-2xl object-cover shadow-lg transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
           ) : (
-            <span className="rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold text-white backdrop-blur">
-              ✓ Verified pro
-            </span>
+            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-primary-dark text-2xl font-extrabold text-white shadow-lg">
+              {initials}
+            </div>
           )}
-          <span className="rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur">
-            🛡️ Insured
-          </span>
+        </div>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="truncate text-lg font-extrabold text-ink">{provider.name}</h3>
+            {topRated && (
+              <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-warning">
+                ★ Top rated
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* ------- Avatar + identity ------- */}
-      <div className="relative -mt-9 px-5">
-        <div className="flex items-end gap-4">
-          <div className="shrink-0">
-            {provider.imageUrl ? (
-              <img
-                src={provider.imageUrl}
-                alt={provider.name}
-                className="h-20 w-20 rounded-2xl border-4 border-white object-cover shadow-lg transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
-              />
-            ) : (
-              <div className="flex h-20 w-20 items-center justify-center rounded-2xl border-4 border-white bg-linear-to-br from-primary to-primary-dark text-2xl font-extrabold text-white shadow-lg">
-                {initials}
-              </div>
-            )}
-          </div>
-          <div className="min-w-0 pb-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <h3 className="truncate text-lg font-extrabold text-ink">{provider.name}</h3>
-              {topRated && (
-                <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-warning">
-                  ★ Top rated
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
+      {/* ------- Badges ------- */}
+      <div className="mt-3 flex flex-wrap items-center gap-1.5 px-5">
+        {showService && service ? (
+          <span className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary-dark">
+            {service.emoji} {service.name}
+          </span>
+        ) : (
+          <span className="rounded-full bg-fog px-2.5 py-1 text-xs font-semibold text-ink-soft">
+            ✓ Verified pro
+          </span>
+        )}
+        <span className="rounded-full bg-fog px-2.5 py-1 text-xs font-semibold text-ink-soft">
+          🛡️ Insured
+        </span>
       </div>
 
       {/* ------- Rating row ------- */}

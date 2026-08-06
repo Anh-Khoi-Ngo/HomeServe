@@ -52,7 +52,7 @@ export default function ProviderDetailPage() {
 
       <div className="mt-6 overflow-hidden rounded-3xl border border-gray-200/70 bg-white shadow-lg">
         {/* Banner */}
-        <div className="h-36 bg-gradient-to-r from-primary to-primary-dark" />
+        <div className="h-36 bg-linear-to-r from-primary to-primary-dark" />
         <div className="px-6 pb-8 sm:px-10">
           <div className="-mt-14 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             {provider.imageUrl ? (
@@ -62,7 +62,7 @@ export default function ProviderDetailPage() {
                 className="h-28 w-28 rounded-3xl border-4 border-white object-cover shadow-lg"
               />
             ) : (
-              <div className="flex h-28 w-28 items-center justify-center rounded-3xl border-4 border-white bg-gradient-to-br from-primary to-primary-dark text-5xl font-extrabold text-white shadow-lg">
+              <div className="flex h-28 w-28 items-center justify-center rounded-3xl border-4 border-white bg-linear-to-br from-primary to-primary-dark text-5xl font-extrabold text-white shadow-lg">
                 {provider.name?.[0]?.toUpperCase()}
               </div>
             )}
@@ -122,7 +122,7 @@ export default function ProviderDetailPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-6 text-white shadow-lg">
+          <div className="rounded-2xl bg-linear-to-br from-primary to-primary-dark p-6 text-white shadow-lg">
             <p className="text-sm text-white/70">Average rating</p>
             <p className="mt-1 text-4xl font-extrabold">{provider.rating.toFixed(1)}</p>
             <div className="mt-2">

@@ -54,7 +54,7 @@ export default function ServiceDetailPage() {
       <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_380px]">
         {/* ------- Left: details ------- */}
         <div>
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-primary-light via-white to-fog p-10 text-center">
+          <div className="overflow-hidden rounded-3xl bg-linear-to-br from-primary-light via-white to-fog p-10 text-center">
             <span className="text-7xl drop-shadow">{service.emoji}</span>
             <h1 className="mt-4 text-4xl font-extrabold text-ink">{service.name}</h1>
             <p className="mt-2 text-lg font-medium text-primary-dark">{service.tagline}</p>
