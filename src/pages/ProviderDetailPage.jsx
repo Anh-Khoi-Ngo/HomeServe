@@ -51,18 +51,16 @@ export default function ProviderDetailPage() {
       </nav>
 
       <div className="mt-6 overflow-hidden rounded-3xl border border-gray-200/70 bg-white shadow-lg">
-        {/* Banner */}
-        <div className="h-36 bg-linear-to-r from-primary to-primary-dark" />
-        <div className="px-6 pb-8 sm:px-10">
-          <div className="-mt-14 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="px-6 pb-8 pt-7 sm:px-10">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             {provider.imageUrl ? (
               <img
                 src={provider.imageUrl}
                 alt={provider.name}
-                className="h-28 w-28 rounded-3xl border-4 border-white object-cover shadow-lg"
+                className="h-24 w-24 rounded-2xl object-cover shadow-lg"
               />
             ) : (
-              <div className="flex h-28 w-28 items-center justify-center rounded-3xl border-4 border-white bg-linear-to-br from-primary to-primary-dark text-5xl font-extrabold text-white shadow-lg">
+              <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-fog text-4xl font-extrabold text-ink-soft shadow-lg">
                 {provider.name?.[0]?.toUpperCase()}
               </div>
             )}
