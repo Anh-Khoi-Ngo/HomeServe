@@ -1,11 +1,13 @@
 /**
  * Favorite services — saved per user in localStorage.
- * Simple, fast, and works in every auth mode.
+ * Favorites are strictly per-account: they require a real user id,
+ * so signed-out visitors can never save anything.
  */
 
-const key = (userId) => `hs_favorites_${userId || 'guest'}`
+const key = (userId) => `hs_favorites_${userId}`
 
 export function getFavorites(userId) {
+  if (!userId) return []
   try {
     return JSON.parse(localStorage.getItem(key(userId)) || '[]')
   } catch {
@@ -14,6 +16,7 @@ export function getFavorites(userId) {
 }
 
 export function toggleFavorite(userId, serviceId) {
+  if (!userId) return []
   const list = getFavorites(userId)
   const next = list.includes(serviceId)
     ? list.filter((id) => id !== serviceId)
@@ -23,5 +26,6 @@ export function toggleFavorite(userId, serviceId) {
 }
 
 export function isFavorite(userId, serviceId) {
+  if (!userId) return false
   return getFavorites(userId).includes(serviceId)
 }

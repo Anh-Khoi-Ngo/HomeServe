@@ -1,17 +1,23 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toggleFavorite, isFavorite } from '../services/storage.js'
 import { useAppUser } from '../context/AuthContext.jsx'
 import StarRating from './StarRating.jsx'
 import { useState } from 'react'
 
 export default function ServiceCard({ service }) {
-  const { user } = useAppUser()
+  const { user, isSignedIn } = useAppUser()
+  const navigate = useNavigate()
+  const location = useLocation()
   const [fav, setFav] = useState(() => isFavorite(user?.id, service.id))
   const [bump, setBump] = useState(false)
 
   const handleFav = (e) => {
     e.preventDefault()
-    const next = toggleFavorite(user?.id, service.id)
+    if (!isSignedIn) {
+      navigate('/sign-in', { state: { from: location.pathname } })
+      return
+    }
+    const next = toggleFavorite(user.id, service.id)
     setFav(next.includes(service.id))
     setBump(true)
     setTimeout(() => setBump(false), 300)

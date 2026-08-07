@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { getService } from '../data/services.js'
 import { fetchReviews, fetchProviders } from '../services/dummyjson.js'
 import { toggleFavorite, isFavorite } from '../services/storage.js'
@@ -10,7 +10,9 @@ import ProviderCard from '../components/ProviderCard.jsx'
 export default function ServiceDetailPage() {
   const { id } = useParams()
   const service = getService(id)
-  const { user } = useAppUser()
+  const { user, isSignedIn } = useAppUser()
+  const navigate = useNavigate()
+  const location = useLocation()
   const [reviews, setReviews] = useState([])
   const [providers, setProviders] = useState([])
   const [fav, setFav] = useState(() => isFavorite(user?.id, id))
@@ -38,7 +40,11 @@ export default function ServiceDetailPage() {
   }
 
   const handleFav = () => {
-    setFav(toggleFavorite(user?.id, service.id).includes(service.id))
+    if (!isSignedIn) {
+      navigate('/sign-in', { state: { from: location.pathname } })
+      return
+    }
+    setFav(toggleFavorite(user.id, service.id).includes(service.id))
   }
 
   return (
@@ -137,7 +143,11 @@ export default function ServiceDetailPage() {
                     : 'border-gray-200 text-ink-soft hover:border-accent hover:text-accent'
                 }`}
               >
-                {fav ? '♥ Saved to favorites' : '♡ Save to favorites'}
+                {!isSignedIn
+                  ? '♡ Sign in to save'
+                  : fav
+                    ? '♥ Saved to favorites'
+                    : '♡ Save to favorites'}
               </button>
             </div>
             <p className="mt-4 text-center text-xs text-mist">
