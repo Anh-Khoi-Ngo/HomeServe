@@ -24,9 +24,10 @@ Copy `.env.example` to `.env`.
 | `VITE_FIREBASE_*` | [Firebase](https://console.firebase.google.com) | optional | Bookings & users in Firestore (localStorage otherwise) |
 | `VITE_GEO_DB_KEY` | [GeoDB Cities](https://rapidapi.com/wirefreethought/api/geodb-cities) (free RapidAPI key) | optional | Live city search (sample cities otherwise) |
 
-Authentication is **Clerk-only** — sign in and sign up render Clerk's hosted UI
-at `/sign-in` and `/sign-up`. Without the key the app still runs in a read-only
-state (browsing works; booking and favorites stay locked until the key is added).
+Authentication is **Clerk-only** — the navbar's **Sign in** and **Sign up**
+buttons open Clerk's hosted modal, so there are no separate auth pages. Without
+the key the app still runs in a read-only state (browsing works; booking and
+favorites stay locked until the key is added).
 
 Firebase setup: create a Firestore database, enable it, then paste the web app
 config into `.env`. Add a `bookings` collection — it's written with the app's
@@ -58,9 +59,7 @@ src/
     ├── ProviderDetailPage.jsx
     ├── BookingPage.jsx
     ├── BookingsPage.jsx
-    ├── FavoritesPage.jsx
-    ├── SignInPage.jsx
-    └── SignUpPage.jsx
+    └── FavoritesPage.jsx
 ```
 
 ## 🧭 Routes
@@ -75,5 +74,6 @@ src/
 | `/book/:serviceId` | Booking — date, time, address (OSM), notes → confirm |
 | `/bookings` | Booking history + cancel |
 | `/favorites` | Saved services |
-| `/sign-in` | Clerk sign in |
-| `/sign-up` | Clerk sign up |
+
+Auth is handled by Clerk's modal (navbar **Sign up** / **Sign in** buttons) —
+there are no `/sign-in` or `/sign-up` routes.

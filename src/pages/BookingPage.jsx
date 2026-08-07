@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { getService } from '../data/services.js'
 import { searchAddresses, geocodeAddress } from '../services/osm.js'
 import { saveBooking } from '../services/firebase.js'
@@ -17,8 +17,7 @@ export default function BookingPage() {
   const { serviceId } = useParams()
   const [searchParams] = useSearchParams()
   const service = getService(serviceId)
-  const navigate = useNavigate()
-  const { user, isSignedIn } = useAppUser()
+  const { user, isSignedIn, openSignIn } = useAppUser()
 
   const [form, setForm] = useState({
     date: TOMORROW, // tomorrow
@@ -92,7 +91,7 @@ export default function BookingPage() {
 
   const confirm = async () => {
     if (!isSignedIn) {
-      navigate('/sign-in', { state: { from: `/book/${serviceId}` } })
+      openSignIn(`/book/${serviceId}`)
       return
     }
     if (!form.address.trim()) return
@@ -193,13 +192,13 @@ export default function BookingPage() {
           <p className="text-ink">
             🔒 You'll need an account to confirm. <strong>Sign in</strong> to keep booking.
           </p>
-          <Link
-            to="/sign-in"
-            state={{ from: `/book/${service.id}` }}
+          <button
+            type="button"
+            onClick={() => openSignIn(`/book/${service.id}`)}
             className="shrink-0 rounded-full bg-ink px-5 py-2 text-xs font-bold text-white transition hover:bg-primary-dark"
           >
             Sign in
-          </Link>
+          </button>
         </div>
       )}
 

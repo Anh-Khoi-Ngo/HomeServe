@@ -36,7 +36,6 @@ export default function Footer() {
             <li><Link to="/providers" className="transition hover:text-primary-light">Our providers</Link></li>
             <li><Link to="/bookings" className="transition hover:text-primary-light">My bookings</Link></li>
             <li><Link to="/favorites" className="transition hover:text-primary-light">Saved services</Link></li>
-            <li><Link to="/sign-in" className="transition hover:text-primary-light">Sign in</Link></li>
           </ul>
         </div>
 

@@ -5,8 +5,10 @@ import ServiceCard from '../components/ServiceCard.jsx'
 import ProviderCard from '../components/ProviderCard.jsx'
 import { SERVICES } from '../data/services.js'
 import { fetchProviders } from '../services/dummyjson.js'
+import { useAppUser } from '../context/AuthContext.jsx'
 
 export default function HomePage() {
+  const { openSignUp, isSignedIn } = useAppUser()
   const [city, setCity] = useState(null)
   const [providers, setProviders] = useState([])
 
@@ -138,12 +140,22 @@ export default function HomePage() {
             <h3 className="text-2xl font-extrabold">Ready to get it done?</h3>
             <p className="mt-1 text-white/80">Join thousands of homeowners booking pros online.</p>
           </div>
-          <Link
-            to="/sign-in"
-            className="rounded-full bg-white px-8 py-3 text-sm font-bold text-primary-dark shadow-lg transition hover:scale-105"
-          >
-            Get started free →
-          </Link>
+          {isSignedIn ? (
+            <Link
+              to="/services"
+              className="rounded-full bg-white px-8 py-3 text-sm font-bold text-primary-dark shadow-lg transition hover:scale-105"
+            >
+              Browse services →
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => openSignUp('/services')}
+              className="rounded-full bg-white px-8 py-3 text-sm font-bold text-primary-dark shadow-lg transition hover:scale-105"
+            >
+              Get started free →
+            </button>
+          )}
         </div>
       </section>
     </div>

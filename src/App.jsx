@@ -10,8 +10,6 @@ import ProviderDetailPage from './pages/ProviderDetailPage.jsx'
 import BookingPage from './pages/BookingPage.jsx'
 import BookingsPage from './pages/BookingsPage.jsx'
 import FavoritesPage from './pages/FavoritesPage.jsx'
-import SignInPage from './pages/SignInPage.jsx'
-import SignUpPage from './pages/SignUpPage.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -36,8 +34,6 @@ export default function App() {
           <Route path="/book/:serviceId" element={<BookingPage />} />
           <Route path="/bookings" element={<BookingsPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/sign-in" element={<SignInPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </main>

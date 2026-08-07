@@ -1,20 +1,22 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { toggleFavorite, isFavorite } from '../services/storage.js'
 import { useAppUser } from '../context/AuthContext.jsx'
 import StarRating from './StarRating.jsx'
+import SignInToast from './SignInToast.jsx'
 import { useState } from 'react'
 
 export default function ServiceCard({ service }) {
   const { user, isSignedIn } = useAppUser()
-  const navigate = useNavigate()
   const location = useLocation()
   const [fav, setFav] = useState(() => isFavorite(user?.id, service.id))
   const [bump, setBump] = useState(false)
+  const [prompt, setPrompt] = useState(false)
 
   const handleFav = (e) => {
     e.preventDefault()
     if (!isSignedIn) {
-      navigate('/sign-in', { state: { from: location.pathname } })
+      // Nudge the visitor to create an account first.
+      setPrompt(true)
       return
     }
     const next = toggleFavorite(user.id, service.id)
@@ -28,6 +30,15 @@ export default function ServiceCard({ service }) {
       to={`/services/${service.id}`}
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-200/70 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
     >
+      {/* Sign-in prompt for signed-out visitors */}
+      {prompt && (
+        <SignInToast
+          message="You need an account to save favorites"
+          redirectUrl={location.pathname}
+          onClose={() => setPrompt(false)}
+        />
+      )}
+
       {/* Emoji banner */}
       <div className="relative flex h-36 items-center justify-center bg-linear-to-br from-primary-light via-white to-fog">
         <span className="text-6xl drop-shadow-sm transition-transform duration-300 group-hover:scale-110">

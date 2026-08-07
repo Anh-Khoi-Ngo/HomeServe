@@ -33,6 +33,20 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Bottom toast prompt (X centering comes from Tailwind's -translate-x-1/2) */
+.toast-pop {
+  animation: toastUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes toastUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-pop { animation: none; }
+}
+
 /* Thin scrollbar for horizontal chips */
 .chips-scroll::-webkit-scrollbar { height: 6px; }
 .chips-scroll::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 999px; }

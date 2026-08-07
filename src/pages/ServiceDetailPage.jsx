@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { getService } from '../data/services.js'
 import { fetchReviews, fetchProviders } from '../services/dummyjson.js'
 import { toggleFavorite, isFavorite } from '../services/storage.js'
 import { useAppUser } from '../context/AuthContext.jsx'
 import StarRating from '../components/StarRating.jsx'
 import ProviderCard from '../components/ProviderCard.jsx'
+import SignInToast from '../components/SignInToast.jsx'
 
 export default function ServiceDetailPage() {
   const { id } = useParams()
   const service = getService(id)
   const { user, isSignedIn } = useAppUser()
-  const navigate = useNavigate()
   const location = useLocation()
   const [reviews, setReviews] = useState([])
   const [providers, setProviders] = useState([])
   const [fav, setFav] = useState(() => isFavorite(user?.id, id))
+  const [prompt, setPrompt] = useState(false)
 
   useEffect(() => {
     let active = true
@@ -41,7 +42,8 @@ export default function ServiceDetailPage() {
 
   const handleFav = () => {
     if (!isSignedIn) {
-      navigate('/sign-in', { state: { from: location.pathname } })
+      // Nudge the visitor to create an account first.
+      setPrompt(true)
       return
     }
     setFav(toggleFavorite(user.id, service.id).includes(service.id))
@@ -154,6 +156,15 @@ export default function ServiceDetailPage() {
               Free cancellation up to 24h before the visit.
             </p>
           </div>
+
+          {/* Sign-in prompt for signed-out visitors */}
+          {prompt && (
+            <SignInToast
+              message="You need an account to save favorites"
+              redirectUrl={location.pathname}
+              onClose={() => setPrompt(false)}
+            />
+          )}
 
           {/* Providers for this service */}
           {providers.length > 0 && (

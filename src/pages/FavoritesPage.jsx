@@ -5,7 +5,7 @@ import { getService, SERVICES } from '../data/services.js'
 import { useAppUser } from '../context/AuthContext.jsx'
 
 export default function FavoritesPage() {
-  const { user, isSignedIn } = useAppUser()
+  const { user, isSignedIn, openSignIn } = useAppUser()
   const [favIds, setFavIds] = useState(() => getFavorites(user?.id))
 
   const saved = favIds.map(getService).filter(Boolean)
@@ -17,13 +17,13 @@ export default function FavoritesPage() {
         <p className="text-5xl">🔒</p>
         <h1 className="mt-4 text-3xl font-extrabold text-ink">Sign in to see your favorites</h1>
         <p className="mt-3 text-ink-soft">Saved services sync with your account.</p>
-        <Link
-          to="/sign-in"
-          state={{ from: '/favorites' }}
-          className="mt-8 inline-block rounded-full bg-primary px-8 py-3 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-dark"
+        <button
+          type="button"
+          onClick={() => openSignIn('/favorites')}
+          className="mt-8 rounded-full bg-primary px-8 py-3 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-dark"
         >
           Sign in →
-        </Link>
+        </button>
       </div>
     )
   }

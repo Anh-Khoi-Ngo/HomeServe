@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { ClerkProvider, useUser, useAuth } from '@clerk/react'
+import { ClerkProvider, useUser, useAuth, useClerk } from '@clerk/react'
 
 /**
  * AuthContext hides Clerk behind one simple hook: useAppUser().
@@ -25,6 +25,7 @@ export const useAppUser = () => useContext(AuthContext)
 function ClerkBridge({ children }) {
   const { user } = useUser()
   const { isSignedIn, isLoaded, signOut } = useAuth()
+  const { openSignIn, openSignUp } = useClerk()
 
   const value = {
     authType: 'clerk',
@@ -39,6 +40,9 @@ function ClerkBridge({ children }) {
         }
       : null,
     signOut: () => signOut(),
+    // Open Clerk's sign-in / sign-up modals (no separate pages needed).
+    openSignIn: (redirectUrl = '/') => openSignIn({ redirectUrl }),
+    openSignUp: (redirectUrl = '/') => openSignUp({ redirectUrl }),
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
@@ -53,6 +57,8 @@ function NoAuthBridge({ children }) {
     isSignedIn: false,
     user: null,
     signOut: () => {},
+    openSignIn: () => {},
+    openSignUp: () => {},
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

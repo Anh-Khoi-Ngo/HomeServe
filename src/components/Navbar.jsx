@@ -12,7 +12,7 @@ const LINKS = [
 ]
 
 export default function Navbar() {
-  const { isSignedIn, user, signOut, authType } = useAppUser()
+  const { isSignedIn, user, signOut, authType, openSignIn, openSignUp } = useAppUser()
   const [open, setOpen] = useState(false)
   const linkClass = ({ isActive }) =>
     `rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
@@ -40,15 +40,29 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          {authType === 'clerk' ? (
+          {authType === 'clerk' && isSignedIn ? (
             <UserButton afterSignOutUrl="/" />
           ) : (
-            <Link
-              to="/sign-in"
-              className="hidden rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-sm shadow-primary/30 transition hover:bg-primary-dark md:block"
-            >
-              Sign in
-            </Link>
+            <>
+              <button
+                type="button"
+                onClick={() => openSignUp('/')}
+                disabled={authType !== 'clerk'}
+                title={authType !== 'clerk' ? 'Clerk not configured — add your key to .env' : 'Create a free account'}
+                className="hidden rounded-full border-2 border-primary px-5 py-2 text-sm font-bold text-primary transition hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-50 md:block"
+              >
+                Sign up
+              </button>
+              <button
+                type="button"
+                onClick={() => openSignIn('/')}
+                disabled={authType !== 'clerk'}
+                title={authType !== 'clerk' ? 'Clerk not configured — add your key to .env' : 'Sign in to your account'}
+                className="hidden rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-sm shadow-primary/30 transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50 md:block"
+              >
+                Sign in
+              </button>
+            </>
           )}
 
           <button
@@ -92,15 +106,32 @@ export default function Navbar() {
                 {l.label}
               </NavLink>
             ))}
-            <div className="mt-2 border-t border-gray-100 pt-3">
+            <div className="mt-2 grid gap-2 border-t border-gray-100 pt-3">
               {!isSignedIn && (
-                <Link
-                  to="/sign-in"
-                  onClick={() => setOpen(false)}
-                  className="block rounded-xl bg-primary px-4 py-2.5 text-center text-sm font-bold text-white"
-                >
-                  Sign in
-                </Link>
+                <>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      openSignUp('/')
+                      setOpen(false)
+                    }}
+                    disabled={authType !== 'clerk'}
+                    className="rounded-xl border-2 border-primary px-4 py-2.5 text-sm font-bold text-primary disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Sign up
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      openSignIn('/')
+                      setOpen(false)
+                    }}
+                    disabled={authType !== 'clerk'}
+                    className="rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Sign in
+                  </button>
+                </>
               )}
               {isSignedIn && (
                 <button

@@ -11,7 +11,7 @@ const STATUS_STYLES = {
 }
 
 export default function BookingsPage() {
-  const { user, isSignedIn } = useAppUser()
+  const { user, isSignedIn, openSignIn } = useAppUser()
   const [bookings, setBookings] = useState([])
   const [loaded, setLoaded] = useState(false)
 
@@ -41,13 +41,13 @@ export default function BookingsPage() {
         <p className="text-5xl">🔒</p>
         <h1 className="mt-4 text-3xl font-extrabold text-ink">Sign in to see your bookings</h1>
         <p className="mt-3 text-ink-soft">Your booking history lives with your account.</p>
-        <Link
-          to="/sign-in"
-          state={{ from: '/bookings' }}
-          className="mt-8 inline-block rounded-full bg-primary px-8 py-3 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-dark"
+        <button
+          type="button"
+          onClick={() => openSignIn('/bookings')}
+          className="mt-8 rounded-full bg-primary px-8 py-3 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-dark"
         >
           Sign in →
-        </Link>
+        </button>
       </div>
     )
   }
