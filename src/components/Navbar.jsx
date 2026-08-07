@@ -14,7 +14,6 @@ const LINKS = [
 export default function Navbar() {
   const { isSignedIn, user, signOut, authType } = useAppUser()
   const [open, setOpen] = useState(false)
-
   const linkClass = ({ isActive }) =>
     `rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
       isActive
@@ -43,18 +42,6 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {authType === 'clerk' ? (
             <UserButton afterSignOutUrl="/" />
-          ) : isSignedIn ? (
-            <div className="hidden items-center gap-2 md:flex">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-sm font-bold text-primary-dark">
-                {user?.name?.[0]?.toUpperCase() || 'G'}
-              </div>
-              <button
-                onClick={() => signOut()}
-                className="rounded-full border border-gray-200 px-4 py-1.5 text-sm font-semibold text-ink-soft transition hover:border-accent hover:text-accent"
-              >
-                Sign out
-              </button>
-            </div>
           ) : (
             <Link
               to="/sign-in"

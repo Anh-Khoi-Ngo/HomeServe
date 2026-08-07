@@ -1,17 +1,17 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
 import { ClerkProvider, useUser, useAuth } from '@clerk/react'
 
 /**
- * AuthContext hides the auth provider behind one simple hook: useAppUser().
+ * AuthContext hides Clerk behind one simple hook: useAppUser().
  *
- * - If VITE_CLERK_PUBLISHABLE_KEY is set in the .env file, Clerk powers auth.
- * - Otherwise the app runs in "demo mode" with a guest login stored in
- *   localStorage, so everything still works in the preview.
+ * Authentication is Clerk-only. Set VITE_CLERK_PUBLISHABLE_KEY in your .env
+ * file to enable it. Without a key the app runs in a read-only "no auth"
+ * state so browsing still works — sign-in, booking, and favorites stay
+ * locked until the key is added.
  */
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 const USE_CLERK = Boolean(PUBLISHABLE_KEY)
-const DEMO_KEY = 'hs_demo_user'
 
 const AuthContext = createContext(null)
 
@@ -44,39 +44,16 @@ function ClerkBridge({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-/* ---------- Demo auth (guest account saved in localStorage) ---------- */
+/* ---------- No Clerk key yet — browsing works, accounts are off ---------- */
 
-function DemoBridge({ children }) {
-  const [user, setUser] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem(DEMO_KEY) || 'null')
-    } catch {
-      return null
-    }
-  })
-
+function NoAuthBridge({ children }) {
   const value = {
-    authType: 'demo',
+    authType: 'none',
     isLoaded: true,
-    isSignedIn: Boolean(user),
-    user,
-    signInDemo: (name) => {
-      const newUser = {
-        id: 'demo-' + Date.now(),
-        name: name?.trim() || 'Guest',
-        email: '',
-        imageUrl: null,
-        isDemo: true,
-      }
-      localStorage.setItem(DEMO_KEY, JSON.stringify(newUser))
-      setUser(newUser)
-    },
-    signOut: () => {
-      localStorage.removeItem(DEMO_KEY)
-      setUser(null)
-    },
+    isSignedIn: false,
+    user: null,
+    signOut: () => {},
   }
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
@@ -90,5 +67,5 @@ export function AuthProvider({ children }) {
       </ClerkProvider>
     )
   }
-  return <DemoBridge>{children}</DemoBridge>
+  return <NoAuthBridge>{children}</NoAuthBridge>
 }

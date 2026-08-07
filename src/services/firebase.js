@@ -1,7 +1,7 @@
 /**
  * Firebase → bookings + users.
  * Uses Firestore when the VITE_FIREBASE_* env vars are filled in,
- * otherwise stores data in localStorage so the demo works with no setup.
+ * otherwise stores data in localStorage so the app works with no setup.
  * The API is the same either way, so swapping in real Firebase is zero-code.
  */
 

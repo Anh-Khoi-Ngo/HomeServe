@@ -14,18 +14,19 @@ npm install
 npm run dev
 ```
 
-It works with **zero configuration** — every external service has a graceful
-demo fallback (guest login, localStorage, sample cities, local reviews).
+## 🔑 Setup: Clerk is required for accounts
 
-## 🔑 Optional env vars
+Copy `.env.example` to `.env`.
 
-Copy `.env.example` to `.env` and fill in what you have. Every value is optional.
+| Variable | Service | Required | What it enables |
+| --- | --- | --- | --- |
+| `VITE_CLERK_PUBLISHABLE_KEY` | [Clerk](https://dashboard.clerk.com) | ✅ for sign in / sign up | Real accounts, booking, favorites |
+| `VITE_FIREBASE_*` | [Firebase](https://console.firebase.google.com) | optional | Bookings & users in Firestore (localStorage otherwise) |
+| `VITE_GEO_DB_KEY` | [GeoDB Cities](https://rapidapi.com/wirefreethought/api/geodb-cities) (free RapidAPI key) | optional | Live city search (sample cities otherwise) |
 
-| Variable | Service | What it enables |
-| --- | --- | --- |
-| `VITE_CLERK_PUBLISHABLE_KEY` | [Clerk](https://dashboard.clerk.com) | Real accounts, sign in/up UI |
-| `VITE_FIREBASE_*` | [Firebase](https://console.firebase.google.com) | Bookings & users in Firestore |
-| `VITE_GEO_DB_KEY` | [GeoDB Cities](https://rapidapi.com/wirefreethought/api/geodb-cities) (free RapidAPI key) | Live city search |
+Authentication is **Clerk-only** — sign in and sign up render Clerk's hosted UI
+at `/sign-in` and `/sign-up`. Without the key the app still runs in a read-only
+state (browsing works; booking and favorites stay locked until the key is added).
 
 Firebase setup: create a Firestore database, enable it, then paste the web app
 config into `.env`. Add a `bookings` collection — it's written with the app's
@@ -39,7 +40,7 @@ src/
 ├── App.jsx                  # Routes + layout shell
 ├── index.css                # Tailwind theme + brand palette
 ├── context/
-│   └── AuthContext.jsx      # Clerk auth, with demo-mode fallback (useAppUser)
+│   └── AuthContext.jsx      # Clerk auth (useAppUser hook)
 ├── data/
 │   └── services.js          # The 7 services + fallback data
 ├── services/
@@ -58,7 +59,8 @@ src/
     ├── BookingPage.jsx
     ├── BookingsPage.jsx
     ├── FavoritesPage.jsx
-    └── SignInPage.jsx
+    ├── SignInPage.jsx
+    └── SignUpPage.jsx
 ```
 
 ## 🧭 Routes
@@ -73,4 +75,5 @@ src/
 | `/book/:serviceId` | Booking — date, time, address (OSM), notes → confirm |
 | `/bookings` | Booking history + cancel |
 | `/favorites` | Saved services |
-| `/sign-in` | Clerk sign-in / demo guest login |
+| `/sign-in` | Clerk sign in |
+| `/sign-up` | Clerk sign up |

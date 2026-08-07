@@ -191,7 +191,7 @@ export default function BookingPage() {
       {!isSignedIn && (
         <div className="mt-6 flex items-center justify-between gap-4 rounded-2xl border border-warning/40 bg-warning/10 px-5 py-4 text-sm">
           <p className="text-ink">
-            🔒 You'll need an account to confirm. <strong>Sign in</strong> (or continue as a guest in demo mode) to keep booking.
+            🔒 You'll need an account to confirm. <strong>Sign in</strong> to keep booking.
           </p>
           <Link
             to="/sign-in"
@@ -364,7 +364,7 @@ export default function BookingPage() {
               <p className="mt-3 text-center text-xs text-mist">Enter an address to confirm.</p>
             )}
             <p className="mt-4 text-center text-xs text-mist">
-              🔥 Stored securely {`${import.meta.env.VITE_FIREBASE_PROJECT_ID ? 'in Firebase' : 'on this device (demo)'}`}
+              🔥 Stored securely {`${import.meta.env.VITE_FIREBASE_PROJECT_ID ? 'in Firebase' : 'on this device'}`}
             </p>
           </div>
         </aside>
