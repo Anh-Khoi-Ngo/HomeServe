@@ -40,9 +40,7 @@ View provider details:
 
 ### 🗺️ Location Search (Optional)
 Search cities and addresses using free APIs.
-
 <br><br>
-
 ## 🛠️ Tech Stack
 - React + Vite  
 - React Router  
@@ -50,9 +48,7 @@ Search cities and addresses using free APIs.
 - Clerk Authentication
 - Reusable components  
 - Free REST APIs  
-
 <br><br>
-
 ## 🔌 APIs Used
 HomeServe uses free, public REST APIs for data:
 
