@@ -45,7 +45,6 @@ export default function Footer() {
             <li>🔑 Clerk authentication</li>
             <li>📍 GeoDB Cities + OpenStreetMap</li>
             <li>👷 DummyJSON providers &amp; reviews</li>
-            <li>🔥 Firebase bookings &amp; users</li>
           </ul>
         </div>
       </div>
