@@ -27,5 +27,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-echo ".freebuff/" >> .gitignore
-git rm -r --cached .freebuff
+
+# Freebuff desktop app local state (do not commit)
+.freebuff/
