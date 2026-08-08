@@ -33,16 +33,63 @@ export async function fetchProviders() {
         handyman: ['TV mounting', 'Assembly', 'Drywall', 'Door repair'],
       }[service]
       const rating = Math.round((3.8 + seeded(u.id) * 1.2) * 10) / 10
+      const rolePool = {
+        cleaning: ['Lead Cleaner', 'Deep Clean Specialist', 'Home Cleaning Pro'],
+        plumbing: ['Master Plumber', 'Licensed Plumber', 'Plumbing Pro'],
+        electrical: ['Certified Electrician', 'Master Electrician', 'Electrical Pro'],
+        'lawn-care': ['Lawn Specialist', 'Lawn Care Pro', 'Yard Care Specialist'],
+        'snow-removal': ['Snow Crew Lead', 'Plowing Specialist', 'Snow Removal Pro'],
+        painting: ['Painter', 'Master Painter', 'Painting Specialist'],
+        handyman: ['Handyman', 'Fix-It Specialist', 'Handyman Pro'],
+      }[service]
+      const bioPool = {
+        cleaning: [
+          `${u.firstName} keeps every corner spotless — from weekly tidies to full move-out deep cleans, supplies included.`,
+          `${u.firstName} is a cleaning pro with an eye for the details most people miss: baseboards, grout, and windows.`,
+          `${u.firstName} has been making homes shine for years, with a checklist you can approve before the work starts.`,
+        ],
+        plumbing: [
+          `${u.firstName} fixes leaks, clogs, and water heaters with flat-rate pricing agreed before any work begins.`,
+          `${u.firstName} is a licensed plumber who shows up in your chosen window and leaves the workspace cleaner than they found it.`,
+          `${u.firstName} has unclogged, repiped, and swapped enough water heaters to do it with eyes closed.`,
+        ],
+        electrical: [
+          `${u.firstName} is a certified electrician for outlets, lighting, panels, and EV chargers — code-compliant, every time.`,
+          `${u.firstName} takes the fear out of electricity: tidy panels, clean wiring, and a full parts-and-labor warranty.`,
+          `${u.firstName} has upgraded panels and installed smart-home gear for hundreds of homes around town.`,
+        ],
+        'lawn-care': [
+          `${u.firstName} keeps lawns green with mowing, fertilization, and weed control — recurring plans available.`,
+          `${u.firstName} is a lawn specialist who treats every yard like a showpiece, with pet-friendly care.`,
+          `${u.firstName} has been keeping neighborhoods green for seasons, one flawless mow line at a time.`,
+        ],
+        'snow-removal': [
+          `${u.firstName} clears driveways and walkways before your coffee is done, with 24/7 storm response.`,
+          `${u.firstName} is first on the street when the flakes fly — plowing, salting, and de-icing with text alerts.`,
+          `${u.firstName} has spent winters keeping driveways clear with seasonal plans and fast call-outs.`,
+        ],
+        painting: [
+          `${u.firstName} paints interiors, exteriors, and cabinets with premium paints and crisp lines.`,
+          `${u.firstName} is a painter who protects every surface, preps thoroughly, and backs the work with a 5-year warranty.`,
+          `${u.firstName} has transformed hundreds of rooms with careful prep and drop-cloth-everything protection.`,
+        ],
+        handyman: [
+          `${u.firstName} knocks out your whole to-do list in one visit — assembly, mounting, drywall, and small fixes.`,
+          `${u.firstName} is a handyman who books by the hour and only charges for what gets done.`,
+          `${u.firstName} has fixed, mounted, and assembled more than most people own — all in a day's work.`,
+        ],
+      }[service]
+      const pick = (pool) => pool[Math.floor(seeded(u.id * 7 + pool.length) * pool.length)]
       return {
         id: u.id,
         name: `${u.firstName} ${u.lastName}`,
-        role: u.company?.title || `${service.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ')} Pro`,
+        role: pick(rolePool),
         imageUrl: u.image,
         skills: skillPool,
         rating,
         completedJobs: Math.round(80 + seeded(u.id + 7) * 900),
         service,
-        bio: `${u.company?.department || 'HomeServe'} pro with a reputation for showing up on time and doing the job right.`,
+        bio: pick(bioPool),
       }
     })
   } catch {
