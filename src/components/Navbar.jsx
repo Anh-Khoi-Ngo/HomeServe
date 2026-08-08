@@ -49,7 +49,7 @@ export default function Navbar() {
                 onClick={() => openSignUp('/')}
                 disabled={authType !== 'clerk'}
                 title={authType !== 'clerk' ? 'Clerk not configured — add your key to .env' : 'Create a free account'}
-                className="hidden rounded-full border-2 border-primary px-5 py-2 text-sm font-bold text-primary transition hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-50 md:block"
+                className="hidden cursor-pointer rounded-full border-2 border-primary px-5 py-2 text-sm font-bold text-primary transition hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-50 md:block"
               >
                 Sign up
               </button>
@@ -58,7 +58,7 @@ export default function Navbar() {
                 onClick={() => openSignIn('/')}
                 disabled={authType !== 'clerk'}
                 title={authType !== 'clerk' ? 'Clerk not configured — add your key to .env' : 'Sign in to your account'}
-                className="hidden rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-sm shadow-primary/30 transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50 md:block"
+                className="hidden cursor-pointer rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-sm shadow-primary/30 transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50 md:block"
               >
                 Sign in
               </button>
@@ -116,7 +116,7 @@ export default function Navbar() {
                       setOpen(false)
                     }}
                     disabled={authType !== 'clerk'}
-                    className="rounded-xl border-2 border-primary px-4 py-2.5 text-sm font-bold text-primary disabled:cursor-not-allowed disabled:opacity-50"
+                    className="cursor-pointer rounded-xl border-2 border-primary px-4 py-2.5 text-sm font-bold text-primary disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Sign up
                   </button>
@@ -127,7 +127,7 @@ export default function Navbar() {
                       setOpen(false)
                     }}
                     disabled={authType !== 'clerk'}
-                    className="rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    className="cursor-pointer rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Sign in
                   </button>
