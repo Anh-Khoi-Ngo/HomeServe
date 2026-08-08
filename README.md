@@ -55,4 +55,3 @@ HomeServe uses free, public REST APIs for data:
 - **GeoDB Cities API** — city search  
 - **DummyJSON** — providers, reviews, mock data  
 - **JSONPlaceholder** — booking simulation  
-- **OpenStreetMap / Nominatim** — address lookup   
