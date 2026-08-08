@@ -3,7 +3,7 @@ HomeServe is a modern React web app that helps users find and book local home se
 It’s designed as a real-world, consumer-friendly project that showcases practical UI, clean design, and API integration.
 <br><br><br><br>
 <img width="1895" height="842" alt="Screenshot 2026-08-07 235221" src="https://github.com/user-attachments/assets/c2246a98-49be-4f00-aa2a-ca5d1f65607e" />
-<br><br><br><br>
+<br><br>
 ## 🌟 Features
 
 ### 🔧 Browse Services
@@ -41,7 +41,7 @@ View provider details:
 ### 🗺️ Location Search (Optional)
 Search cities and addresses using free APIs.
 
-<br><br><br><br>
+<br><br>
 
 ## 🛠️ Tech Stack
 - React + Vite  
@@ -51,7 +51,7 @@ Search cities and addresses using free APIs.
 - Reusable components  
 - Free REST APIs  
 
-<br><br><br><br>
+<br><br>
 
 ## 🔌 APIs Used
 HomeServe uses free, public REST APIs for data:
