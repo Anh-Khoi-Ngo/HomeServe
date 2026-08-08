@@ -27,3 +27,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+echo ".freebuff/" >> .gitignore
+git rm -r --cached .freebuff
